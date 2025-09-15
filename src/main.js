@@ -5,11 +5,10 @@ import config from '../config.js';
 /**
  * Retourne un nom de répertoire valide pour Windows.
  * @param {string} raw - le titre d'origine
- * @param {object} [opts] - options (maxLen par défaut 255)
  * @returns {string} nom "sanitizé"
  */
-function sanitizeDirName(raw, opts = {}) {
-    const maxLen = typeof opts.maxLen === 'number' ? opts.maxLen : 255;
+function sanitizeDirName(raw) {
+    const maxLen = 255;
     if (raw == null) return 'untitled';
 
     let name = String(raw);
@@ -82,7 +81,7 @@ function sanitizeDirName(raw, opts = {}) {
         for (let j = 0; j < pageData.length; j++) {
             // Get and parse title
             // dir name that end with ... are in error in Windows
-            let title = sanitizeDirName(pageData[j].title)
+            const title = sanitizeDirName(pageData[j].title)
 
             // Create post title
             const dir = `./data/${id} - ${title}`;
